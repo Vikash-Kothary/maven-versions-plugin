@@ -115,11 +115,7 @@ public class UseLatestVersionsMojo
                 useLatestVersions( pom, list);
             }
         }
-        catch ( ArtifactMetadataRetrievalException e )
-        {
-            throw new MojoExecutionException( e.getMessage(), e );
-        }
-        catch ( IOException e )
+        catch ( ArtifactMetadataRetrievalException | IOException e )
         {
             throw new MojoExecutionException( e.getMessage(), e );
         }
@@ -154,7 +150,7 @@ public class UseLatestVersionsMojo
             }
 
             ArtifactVersion selectedVersion = new DefaultArtifactVersion( version );
-            getLog().debug( "Selected version:" + selectedVersion.toString() );
+            getLog().debug( "Selected version:" + selectedVersion );
 
             getLog().debug( "Looking for newer versions of " + toString( dep ) );
             ArtifactVersions versions = getHelper().lookupArtifactVersions( artifact, false );
